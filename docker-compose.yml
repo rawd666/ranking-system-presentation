@@ -1,0 +1,21 @@
+services:
+  rank:
+    build: .
+    image: rank-presentation:prod
+    container_name: rank
+    restart: unless-stopped
+    networks:
+      - edge-traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=edge-traefik"
+      - "traefik.http.middlewares.rank-compress.compress=true"
+      - "traefik.http.routers.rank-web.rule=Host(`rank.reactiveweb.dev`)"
+      - "traefik.http.routers.rank-web.entrypoints=websecure"
+      - "traefik.http.routers.rank-web.tls.certresolver=le"
+      - "traefik.http.routers.rank-web.middlewares=rank-compress@docker"
+      - "traefik.http.services.rank-web.loadbalancer.server.port=80"
+
+networks:
+  edge-traefik:
+    external: true
