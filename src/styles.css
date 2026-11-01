@@ -785,13 +785,6 @@ h3 {
   stroke-width: 1.5;
 }
 
-.edge-implicit {
-  stroke: var(--sun);
-  stroke-width: 3;
-  stroke-dasharray: 3 7;
-  stroke-linecap: round;
-}
-
 .node {
   fill: var(--ink);
   stroke: var(--paper);
@@ -802,24 +795,6 @@ h3 {
   fill: var(--paper);
   font-family: var(--mono);
   font-size: 18px;
-}
-
-.node-label.small {
-  font-size: 13px;
-}
-
-.edge-stars {
-  fill: var(--sun);
-  font-size: 12px;
-  paint-order: stroke;
-  stroke: var(--ink);
-  stroke-width: 5px;
-}
-
-.graph-note {
-  fill: var(--sun);
-  font-family: var(--mono);
-  font-size: 12px;
 }
 
 .legend {
@@ -866,84 +841,6 @@ h3 {
 .calc-line {
   font-family: var(--mono);
   font-size: 1.3em;
-}
-
-/* Harary */
-
-.harary-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(24px, 4vw, 64px);
-}
-
-.portrait {
-  width: clamp(190px, 21vw, 300px);
-}
-
-.portrait img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 184 / 274;
-  object-fit: cover;
-  border-radius: 12px;
-  border-bottom: 8px solid var(--sun-strong);
-}
-
-.portrait figcaption {
-  margin-top: 0.6em;
-  font-size: 0.82em;
-  color: var(--ink-soft);
-}
-
-.portrait strong,
-.triad strong {
-  display: block;
-  color: var(--ink);
-}
-
-.triads {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 0.4em;
-}
-
-.triad svg {
-  display: block;
-  width: 100%;
-  max-width: 130px;
-  max-height: 18vh;
-}
-
-.triad figcaption {
-  font-size: 0.8em;
-  color: var(--ink-soft);
-}
-
-.tri-pos,
-.tri-neg {
-  stroke: var(--ink);
-  stroke-width: 2;
-}
-
-.tri-neg {
-  stroke-dasharray: 4 3;
-}
-
-.tri-sign-bg {
-  fill: var(--sun-strong);
-}
-
-.tri-sign {
-  font-family: var(--mono);
-  font-size: 12px;
-  fill: var(--ink);
-}
-
-.tri-node {
-  fill: var(--ink);
 }
 
 /* Terms */
@@ -1279,8 +1176,7 @@ input[type='range']::-moz-range-thumb {
 @media (max-width: 860px) {
   .split,
   .split-even,
-  .pair,
-  .harary-grid {
+  .pair {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1295,14 +1191,6 @@ input[type='range']::-moz-range-thumb {
   .opener-body {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .portrait {
-    width: 184px;
-  }
-
-  .triads {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .compare td {

@@ -1,4 +1,3 @@
-import harary from '../assets/frank-harary.jpg'
 import { Formula, Mark2, Opener, Slide, Stars } from '../components/ui.jsx'
 
 const NODES = {
@@ -81,89 +80,6 @@ function SignedGraph() {
   )
 }
 
-const TRIADS = [
-  { signs: [1, 1, 1], read: 'All friends' },
-  { signs: [1, -1, -1], read: 'Two friends, one shared enemy' },
-  { signs: [1, 1, -1], read: 'A friend’s friend is an enemy' },
-  { signs: [-1, -1, -1], read: 'Three mutual enemies' },
-]
-
-function Triad({ signs, read }) {
-  const points = [
-    [50, 10],
-    [90, 80],
-    [10, 80],
-  ]
-  const balanced = signs[0] * signs[1] * signs[2] > 0
-  return (
-    <figure className="triad">
-      <svg viewBox="0 0 100 90" role="img" aria-label={`${read}: ${balanced ? 'balanced' : 'unbalanced'}`}>
-        {points.map(([x, y], i) => {
-          const [x2, y2] = points[(i + 1) % 3]
-          const positive = signs[i] > 0
-          return (
-            <g key={i}>
-              <line className={positive ? 'tri-pos' : 'tri-neg'} x1={x} y1={y} x2={x2} y2={y2} />
-              <circle className="tri-sign-bg" cx={(x + x2) / 2} cy={(y + y2) / 2} r="8" />
-              <text className="tri-sign" x={(x + x2) / 2} y={(y + y2) / 2 + 4} textAnchor="middle">
-                {positive ? '+' : '−'}
-              </text>
-            </g>
-          )
-        })}
-        {points.map(([x, y]) => (
-          <circle key={`${x}${y}`} className="tri-node" cx={x} cy={y} r="6" />
-        ))}
-      </svg>
-      <figcaption>
-        <strong>{balanced ? 'Balanced' : 'Unbalanced'}</strong>
-        {read}
-      </figcaption>
-    </figure>
-  )
-}
-
-const RATERS = [
-  [80, 'Rater 1'],
-  [560, 'Rater 2'],
-]
-const TARGETS = [
-  [100, 'T1', '★★★'],
-  [180, 'T2', '★'],
-  [260, 'T3', '★★★'],
-]
-
-function ImplicitEdge() {
-  return (
-    <svg className="graph" viewBox="0 0 640 310" role="img" aria-label="Two raters give the same ratings to three targets, which creates an implicit edge between them">
-      <path className="edge edge-implicit" d="M80 152 C130 10 510 10 560 152" />
-      <text className="graph-note" x="320" y="28" textAnchor="middle">implicit edge</text>
-      {RATERS.flatMap(([x]) =>
-        TARGETS.map(([y, name, stars]) => (
-          <g key={`${x}${name}`}>
-            <line className="edge edge-pos" x1={x} y1="180" x2="320" y2={y} />
-            <text className="edge-stars" x={x + (320 - x) * 0.62} y={180 + (y - 180) * 0.62 + 5} textAnchor="middle">
-              {stars}
-            </text>
-          </g>
-        )),
-      )}
-      {RATERS.map(([x, name]) => (
-        <g key={name}>
-          <rect className="node" x={x - 44} y="156" width="88" height="48" rx="10" />
-          <text className="node-label small" x={x} y="185" textAnchor="middle">{name}</text>
-        </g>
-      ))}
-      {TARGETS.map(([y, name]) => (
-        <g key={name}>
-          <circle className="node" cx="320" cy={y} r="24" />
-          <text className="node-label small" x="320" y={y + 5} textAnchor="middle">{name}</text>
-        </g>
-      ))}
-    </svg>
-  )
-}
-
 export default function Network() {
   return (
     <>
@@ -226,48 +142,6 @@ export default function Network() {
               Mutual high ratings are a <strong>stronger “friend” signal</strong> than one-way, so
               the pair earns the bonus.
             </p>
-          </div>
-        </div>
-      </Slide>
-
-      <Slide section="network" title="Thing to watch 1: structural balance" className="harary">
-        <div className="harary-grid">
-          <figure className="portrait">
-            <img src={harary} alt="Black and white portrait of Frank Harary, an older man in glasses, a jacket and a striped tie, in front of bookshelves" />
-            <figcaption>
-              <strong>Frank Harary</strong>
-              Structural balance theory, with Dorwin Cartwright
-            </figcaption>
-          </figure>
-          <div className="stack">
-            <p className="body">
-              <Mark2>Structural balance theory</Mark2> (Cartwright–Harary) and signed community
-              detection both apply here.
-            </p>
-            <p className="body">
-              <strong>Don’t collapse negatives into “large distance”</strong> or you lose the
-              signal. Negative edges carry meaning that an ordinary distance can’t.
-            </p>
-            <div className="triads">
-              {TRIADS.map((triad) => (
-                <Triad key={triad.read} {...triad} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </Slide>
-
-      <Slide section="network" title="Thing to watch 2: implicit edges">
-        <div className="split">
-          <div className="stack">
-            <p className="body big">
-              Two raters who repeatedly rate the same targets the same way{' '}
-              <Mark2>get an implicit edge</Mark2>.
-            </p>
-            <p className="body">They don’t need to have rated each other. Their matching votes connect them.</p>
-          </div>
-          <div className="card-dark">
-            <ImplicitEdge />
           </div>
         </div>
       </Slide>
