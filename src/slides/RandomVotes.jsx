@@ -114,7 +114,6 @@ export default function RandomVotes() {
                 <li>A big negative gap</li>
                 <li>The free raters form a tight positive cluster in the signed graph</li>
               </ol>
-              <p>Together, a lot harder to argue with than seating data.</p>
             </div>
           </div>
           <GapChart />

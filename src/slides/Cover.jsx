@@ -12,7 +12,7 @@ export default function Cover() {
           Our <Mark2>Rating System</Mark2>
         </h1>
         <p className="lede">
-          Rawd Khaldoun, Amr Al-Sakaji, Ammar, Hala Al-Dayyeh
+          Rawd Khaldoun, Amr Al-Sakaji, Ammar Radwan, Hala Al-Dayyeh
         </p>
         <ol className="agenda">
           {SECTIONS.map((section) => (
